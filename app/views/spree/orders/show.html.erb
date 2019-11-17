@@ -1,0 +1,47 @@
+<div id="order_summary" data-hook>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content pb-5 text-center">
+        <h1 class="hero-heading">Order confirmed</h1>
+        <h4 class="hero-sub-heading"><%=@order.number%></div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-5">
+    <div class="container text-center">
+      <div class="icon-rounded bg-theme mb-3 mx-auto text-white">
+        <svg class="svg-icon w-2rem h-2rem align-middle">
+          <use xlink:href="#checkmark-1"> </use>
+        </svg>
+      </div>
+      <h4 class="mb-3 ff-base">Thank you. Your order is confirmed.</h4>
+      <% if order_just_completed?(@order) %>
+        <p class="text-muted mb-5">Your order will be prepared shortly. We will send an email when it gets shipped.</p>
+      <% end %>
+      <!--<p> <a href="customer-order.html" class="btn btn-outline-theme">View or manage your order</a></p>-->
+    </div>
+  </section>
+  <!--<h1><%= accurate_title %></h1>-->
+  <!--<% if order_just_completed?(@order) %>
+    <strong><%=# Spree.t(:thank_you_for_your_order)
+    %></strong>
+  <% end %>-->
+
+  <div id="order" data-hook>
+    <%= render partial: 'spree/shared/order_details', locals: { order: @order } %>
+
+    <br class="clear" />
+
+    <p data-hook="links">
+      <%= link_to Spree.t(:back_to_store), spree.root_path, class: "btn btn-sm btn-link text-muted" %><br>
+      <% unless order_just_completed?(@order) %>
+        <% if try_spree_current_user && respond_to?(:account_path) %>
+          <%= link_to Spree.t(:my_account), account_path, class: "btn btn-sm btn-link text-muted" %>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div>
+<div id="previewarea" class="preview-elm">
+  <%= render partial: 'spree/shared/previewcore', :locals => {edit: false, addtocart: false, page_type: nil, card_preview: nil} %>
+</div>

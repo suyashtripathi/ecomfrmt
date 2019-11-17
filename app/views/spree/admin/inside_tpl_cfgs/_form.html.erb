@@ -1,0 +1,68 @@
+<div data-hook="admin_property_form" class="row">
+  <div class="col-xs-12 col-md-6">
+    <%= f.field_container :name, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-md-6" data-hook="admin_itc_form_product_category">
+    <%= f.field_container :prod_ctg, class: ['form-group'] do %>
+      <%= f.label :prod_ctg, Spree.t(:product_category) %><span class="required">*</span>
+      <%= f.collection_select(:prod_ctg, Spree::ProductCategory.all, :name, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+      <%= f.error_message_on :prod_ctg %>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-md-6" data-hook="admin_itc_form_prod_key">
+    <%= f.field_container :prod_key, class: ['form-group'] do %>
+      <%= f.label :prod_key, raw(Spree.t(:prod_key) + content_tag(:span, ' *', class: "required")) %>
+      <%= f.text_field :prod_key, class: 'form-control title' %>
+      <%= f.error_message_on :prod_key %>
+    <% end %>
+    </div>
+  <div data-hook="admin_variant_photo_text_fields" class="col-xs-12 col-md-12 col-sm-12" id="variant_photo_text_fields">
+    <fieldset>
+      <strong>Photo(s) Configuration</strong><%= button_link_to(Spree.t(:add_photo_config), "javascript:;", { icon: 'add', :'data-target' => "tbody#photo_cfg_fields", class: 'btn-success spree_add_photo_cfg_fields' }) %>
+      <table class="table sortable" data-hook id="photo_cfg_table">
+        <thead>
+          <tr data-hook="photo_cfgs_header">
+            <th colspan="1"><%= Spree.t(:x_info) %></th>
+            <th colspan="1"><%= Spree.t(:y_info) %></th>
+            <th colspan="1"><%= Spree.t(:w_info) %></th>
+            <th colspan="1"><%= Spree.t(:h_info) %></th>
+            <th colspan="1"><%= Spree.t(:z_info) %></th>
+            <th colspan="1"><%= Spree.t(:page) %></th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody id="photo_cfg_fields" data-hook>
+          <%= f.fields_for :photo_cfgs do |pc_form| %>
+            <%= render 'spree/admin/variants/photo_cfg_fields', f: pc_form %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
+    <fieldset>
+      <strong>Text(s) Configuration</strong>
+      <table class="table sortable" data-hook id="text_cfg_table"><%= button_link_to(Spree.t(:add_text_config), "javascript:;", { icon: 'add', :'data-target' => "tbody#text_cfg_fields", class: 'btn-success spree_add_text_cfg_fields' }) %>
+        <thead>
+          <tr data-hook="text_cfgs_header">
+            <th colspan="1"><%= Spree.t(:x_info) %></th>
+            <th colspan="1"><%= Spree.t(:y_info) %></th>
+            <th colspan="1"><%= Spree.t(:w_info) %></th>
+            <th colspan="1"><%= Spree.t(:h_info) %></th>
+            <th colspan="1"><%= Spree.t(:z_info) %></th>
+            <th colspan="1"><%= Spree.t(:page) %></th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody id="text_cfg_fields" data-hook>
+          <%= f.fields_for :text_cfgs do |pc_form| %>
+            <%= render 'spree/admin/variants/photo_cfg_fields', f: pc_form %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<% @body_id = 'checkout-page' %>
+
+<div id="checkout" data-hook>
+  <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+
+  <!--<div class="row" data-hook="checkout_header">-->
+    <!--<div class="col-sm-3">
+      <h1 data-hook="checkout_title"><%= Spree.t(:checkout) %></h1>
+    </div>
+    <div class="col-sm-9" data-hook="checkout_progress">
+      <%= checkout_progress %>
+    </div>-->
+    <section class="hero" data-hook="checkout_header">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <!--<ol class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Checkout</li>
+        </ol>-->
+        <!-- Hero Content-->
+        <div class="hero-content pb-5 text-center">
+          <h1 class="hero-heading">Checkout</h1>
+          <%=# checkout_progress
+          %>
+          <div class="row">
+          <% if @order.state == "address"%>
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">Please fill in the address.</p></div>
+          <% elsif @order.state == "delivery" %>
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">Delivery Options</p></div>
+          <% elsif @order.state == "payment" %>
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">Choose the payment method.</p></div>
+          <% end %>
+            
+          </div>
+          <!--<div class="row">
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted"><%= @order.state.capitalize %></p></div>
+          </div>-->
+        </div>
+      </div>
+    </section>
+  <!--</div>-->
+
+  <section>
+    <div class="row" data-hook="checkout_content">
+      <div class="col-lg-8">
+        <%= checkout_progress %>
+        <!--<div class="row" data-hook="checkout_content">-->
+        <!--<div class="<%=#
+         if @order.state != 'confirm' then 'col-md-9' else 'col-md-12' end
+         %>" data-hook="checkout_form_wrapper">-->
+        <div data-hook="checkout_form_wrapper">
+          <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+            <!--<% if @order.state == 'address' || !@order.email? %>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <%= form.label :email %>
+                    <%= form.email_field :email, class: 'form-control', required: true %>
+                  </div>
+                </div>
+              </div>
+            <% end %>-->
+            <%= form.hidden_field :state_lock_version %>
+            <%= render @order.state, form: form %>
+          <% end %>
+        </div>
+        <!--</div>-->
+      </div>
+      <% if @order.state != 'confirm' %>
+        <div id="checkout-summary" data-hook="checkout_summary_box" class="col-lg-4">
+          <%= render partial: 'summary', locals: { order: @order } %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+<script>
+  Spree.current_order_id = "<%= @order.number %>"
+  Spree.current_order_token = "<%= @order.token %>"
+</script>

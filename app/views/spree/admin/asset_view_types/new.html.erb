@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:asset_view_types), spree.admin_product_categories_url %> /
+  <%= Spree.t(:new_asset_view_type) %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @asset_view_type } %>
+
+<%= form_for [:admin, @asset_view_type] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

@@ -1,0 +1,83 @@
+<% if @card_dimensions == "5x7" ? tableHeightClass = "table_5_7" : tableHeightClass = "table_7_5" %>
+<% end %>
+<div class="row text-center">
+	<div class="col-md-8 col-md-offset-2" id="demo-intro">Make awesome cards on this website to surprise your loved ones. <br>Click on Browse Cards to see the entire collection.<br> Clicking on <strong>'<'</strong> and <strong>'>'</strong> icons shall help you navigate different pages of the card.</div>
+</div>
+<div class="container-fluid-np <%= tableHeightClass %> table-shadow" id="mt-wood-base">
+	<!--<div class="mtwrapper" onContextMenu="return false;">
+		<div class="bb-custom-wrapper" id="card-preview-container" onContextMenu="return false;">-->
+<% if @card_dimensions == "5x7" ? dirClass = "dir_5_7" : dirClass = "dir_7_5" %>
+<% end %>
+	<div class="mtwrapper">
+		<div class="bb-custom-wrapper" id="card-preview-container" onContextMenu="return false;">	
+			<div class="row">
+				<div class="col-md-2  col-sm-2 col-xs-2">
+					<div id="left-dir" class="<%= dirClass %>" style="position:relative;">
+						<i id="dir-prev" class="fa fa-angle-left fa-5x" style="color:rgba(255, 255, 255, 0.5);padding:20px;background: rgba(245, 245, 245, 0.50);"></i>
+						<p style="font-size:20px !important;color:rgba(255, 255, 255, 0.8);">PREV</p>
+					</div>
+				</div>
+				<div class="col-md-8" style="magin-left:auto;margin-right:auto">
+					<% if @card_dimensions == "5x7" %>
+						<div id="bb-bookblock" class="bb-bookblock cardprvw_5_7"  style="margin-top:20px">
+							<div class="bb-item animate-first" style="margin-left:-172px;">
+								<!--<img src="#{ASSET_ROOTPATH}/orders/#{@order.number}/#{@line_item.id}/page_1.png" id="page01" alt="image01" class="cardprvw_5_7"/>-->
+								<img src="/assets/previews/<%=params[:permalink]+"-p1.png"%>" id="page01" alt="image01" class="cardprvw_5_7"/>
+							</div>
+							<div class="bb-item">
+								<!--<img src="#{ASSET_ROOTPATH}/orders/#{@order.number}/#{@line_item.id}/page_2.png" id="page02" alt="image02" class="cardprvw_5_7"/>-->
+								<img src="/assets/previews/<%=params[:permalink]+"-p2.png"%>" id="page02" alt="image02" class="cardprvw_5_7"/>
+							</div>
+							<div class="bb-item animate-last">
+								<!--<img src="#{ASSET_ROOTPATH}/orders/#{@order.number}/#{@line_item.id}/page_3.png" id="page03" alt="image03" class="cardprvw_5_7"/>-->
+								<img src="/assets/previews/page_3-5x7.png" id="page03" alt="image03" class="cardprvw_5_7"/>
+							</div>
+						</div>
+					<% elsif @card_dimensions == "7x5" %>
+						<div id="bb-bookblock" class="bb-bookblock cardprvw_7_5"  style="margin-top:20px">
+							<div class="bb-item animate-first" style="margin-top:-172px;">
+								<img src="/assets/previews/<%=params[:permalink]+"-p1.png"%>" id="page01" alt="image01" class="cardprvw_7_5"/>
+							</div>
+							<div class="bb-item">
+								<img src="/assets/previews/<%=params[:permalink]+"-p2.png"%>" id="page02" alt="image02" class="cardprvw_7_5"/>
+							</div>
+							<div class="bb-item animate-last">
+								<img src="/assets/previews/page_3-7x5.png" id="page03" alt="image03" class="cardprvw_7_5"/>
+							</div>
+						</div>
+					<% end %>
+				</div>
+				<div class="col-md-2">
+					<div id="right-dir" class="<%= dirClass %>" style="position:relative;">
+						<i id="dir-next" class="fa fa-angle-right fa-5x" style="color:rgba(255, 255, 255, 0.5);padding:20px;background: rgba(245, 245, 245, 0.50);"></i>
+						<p style="font-size:20px !important;color:rgba(255, 255, 255, 0.8);">NEXT</p>
+					</div>					
+				</div>
+
+			</div>
+			<div class="row" style="display:none;">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-6">
+					<nav>
+							<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
+							<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+							<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+							<a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
+					</nav>	
+				</div>	
+				<div class="col-md-3">
+				</div>						
+			</div>
+		</div>	
+	</div>
+</div>
+
+
+<!-- Suyash. Passing image layout to JS -->
+<%= javascript_tag do %>
+	window.pc = "<%= @photocount %>";
+	window.cardlayout = <%= @photoslayout.to_json.html_safe %>;
+	window.bookflip = "<%= @bookflip %>"	
+<% end %>		
+		

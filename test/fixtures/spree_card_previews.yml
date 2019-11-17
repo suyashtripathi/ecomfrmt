@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  inside_tpl_id: 1
+  front_data_id: 1
+  inside_data_id: 1
+  user_id: 1
+  line_item_id: 1
+  variant_id: 1
+  guest_token: MyString
+
+two:
+  number: MyString
+  inside_tpl_id: 1
+  front_data_id: 1
+  inside_data_id: 1
+  user_id: 1
+  line_item_id: 1
+  variant_id: 1
+  guest_token: MyString

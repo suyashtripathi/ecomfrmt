@@ -1,0 +1,118 @@
+/* Dark theme */
+$bgm-color:#343a40;   /* btn-theme main background-color */
+$bdm-color:#343a40;   /* btn-theme main border-color */
+$bgh-color:#23272b;   /* btn-theme hover background-color */
+$bdh-color:#1d2124;   /* btn-theme hover border-color */
+$bgd-color:#343a40;   /* btn-theme disabled background-color */
+$bdd-color:#343a40;   /* btn-theme disabled border-color */
+$bgnt-color:#1d2124;  /* btn-theme not disabled toggle background-color */
+$bdnt-color:#171a1d;  /* btn-theme not disabled toggle border-color */
+$text-color: #fff;
+
+/* Blue Snow theme */
+$bgm-color:#8fd2f9;   /* btn-theme main background-color */
+$bdm-color:#343a40;   /* btn-theme main border-color */
+$bgh-color:#73c6f7;   /* btn-theme hover background-color */
+$bdh-color:#1d2124;   /* btn-theme hover border-color */
+$bgd-color:#c4dce9;   /* btn-theme disabled background-color */
+$bdd-color:#343a40;   /* btn-theme disabled border-color */
+$bgnt-color:#73c6f7;  /* btn-theme not disabled toggle background-color */
+$bdnt-color:#171a1d;  /* btn-theme not disabled toggle border-color */
+$text-color: #000;
+
+/* Btn theme (Info-Border)*/
+$bgm-color:#17a2b8;   /* btn-theme main background-color */
+$bdm-color:#0e7080;   /* btn-theme main border-color */
+$bgh-color:#138496;   /* btn-theme hover background-color */
+$bdh-color:#0e7080;   /* btn-theme hover border-color */
+$bgd-color:#17a2b8;   /* btn-theme disabled background-color */
+$bdd-color:#0e7080;   /* btn-theme disabled border-color */
+$bgnt-color:#117a8b;  /* btn-theme not disabled toggle background-color */
+$bdnt-color:#0e7080;  /* btn-theme not disabled toggle border-color */
+$text-color: #fff;
+
+.btn {
+  border-radius: 3px !important;
+}
+#card-personalize .modal-backdrop {
+  background-color: #0000005e;
+}
+.btn-theme {
+  color: $text-color;
+  background-color: $bgm-color;
+  border-color: $bdm-color;
+}
+
+.btn-theme:hover {
+  color: $text-color;
+  background-color: $bgh-color;
+  border-color: $bdh-color;
+}
+
+.btn-theme:focus, .btn-theme.focus {
+  box-shadow: 0 0 0 0.1rem rgba(82, 88, 93, 0.5);
+}
+
+.btn-theme.disabled, .btn-theme:disabled {
+  color: $text-color;
+  background-color: $bgd-color;
+  border-color: $bdd-color;
+}
+
+.btn-theme:not(:disabled):not(.disabled):active, .btn-theme:not(:disabled):not(.disabled).active,
+.show > .btn-theme.dropdown-toggle {
+  color: $text-color;
+  background-color: $bgnt-color;
+  border-color: $bdnt-color;
+}
+
+.btn-theme:not(:disabled):not(.disabled):active:focus, .btn-theme:not(:disabled):not(.disabled).active:focus,
+.show > .btn-theme.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+/* btn-outline-theme */
+.btn-outline-theme {
+  color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-outline-theme:hover {
+  color: #fff;
+  background-color: #868e96;
+  border-color: #343a40;
+}
+
+.btn-outline-theme:focus, .btn-outline-theme.focus {
+  /*box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);*/
+}
+
+.btn-outline-theme.disabled, .btn-outline-theme:disabled {
+  color: #343a40;
+  background-color: transparent;
+}
+
+.btn-outline-theme:not(:disabled):not(.disabled):active, .btn-outline-theme:not(:disabled):not(.disabled).active,
+.show > .btn-outline-theme.dropdown-toggle {
+  color: #fff;
+  background-color: #868e96;
+  border-color: #343a40;
+}
+
+.btn-outline-theme:not(:disabled):not(.disabled):active:focus, .btn-outline-theme:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-theme.dropdown-toggle:focus {
+  /*box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);*/
+}
+
+.bg-theme {
+  background-color:$bgm-color !important;
+}
+
+a.bg-theme:hover, a.bg-theme:focus,
+button.bg-theme:hover,
+button.bg-theme:focus {
+  background-color: $bgm-color !important;
+}
+/* Fix for upload btn - was staying dark on click */
+.btn-outline-dark:hover {
+  background-color:transparent;
+}

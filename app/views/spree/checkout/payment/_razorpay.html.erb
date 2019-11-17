@@ -1,0 +1,65 @@
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="http://malsup.github.io/jquery.blockUI.js"></script>
+
+  <!--<div id='razorpay' class='btn razorpay-payment-button pull-right'>
+    Pay by Razorpay
+  </div>-->
+  <div id='razorpay' class='btn btn-lg btn-theme pull-right'>
+    Pay <%=current_order.display_total%>
+  </div>
+  <div id='blockUI-message' class="m-3" style='display: none;'>
+    <h6>
+      <b>Hold on! </b><br>
+    </h6>
+    Conecting you back to mangotwins...<br>
+    <div class="dot-flashing m-2" style="left:46%;transform:translateX(-50%);"></div>
+  </div>
+  
+<script>
+$(document).ready(function(){
+
+  $("#razorpay").click(function() {
+    var options = {
+        "key": "<%= payment_method.preferences[:key_id] %>",
+        "amount": "<%= current_order.amount_in_paise %>",
+        'name': "<%= payment_method.preferences[:merchant_name] %>",
+        'description': "<%= payment_method.preferences[:merchant_description] %>",
+        "handler": function (response){
+          $(document).ajaxStart(function() {
+            $.blockUI({ message: $('#blockUI-message'), css: {width:'300px', left: '50%', top:'50%', border:'none', transform:'translate(-50%, -50%)'} });
+            ajaxStartTime = new Date($.now());
+            console.log("Ajax request started. Time: " + ajaxStartTime);
+          });
+          $.ajax({
+            type: 'POST',
+            url: "/razorpay",
+            data: { payment_method_id: "<%= payment_method.id %>", razorpay_payment_id: response.razorpay_payment_id },
+            dataType: 'html'
+          }).done(function(data){
+            ajaxCompletionTime = new Date($.now());
+            console.log("Ajax request completed. Time Started : " + ajaxStartTime + " Time Completed: " + ajaxCompletionTime);
+            //$.blockUI({ message: $('#blockUI-message') });
+            setTimeout(function(){
+              console.log("Wait Time Up. Time: " + new Date($.now()));
+              $.unblockUI();
+              window.location.replace("/orders/<%= current_order.number %>");
+            }, 1000);
+          });
+        },
+        "prefill": {
+            "name": "<%= ((spree_current_user.try(:firstname) if !spree_current_user.try(:firstname).nil?) || spree_current_user.try(:email)) %>" + ' ' + "<%= spree_current_user.try(:lastname) if !spree_current_user.try(:lastname).nil?%>",
+            "email": "<%= spree_current_user.try(:email) %>"
+        },
+        "notes": {
+            "address": "<%= payment_method.preferences[:merchant_address] %>"
+        },
+        "theme": {
+            "color": "<%= payment_method.preferences[:theme_color] %>"
+        }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+  });
+  
+});
+</script>

@@ -1,0 +1,75 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
+    <%= render partial: 'spree/shared/head' %>
+  </head>
+  <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+    <%= render partial: 'spree/shared/sleekheader' %>
+
+    <div class="container">
+      <div class="row" data-hook>
+        <%= spree_breadcrumbs(@taxon) %>
+  
+        <%=# render partial: 'spree/shared/sidebar' if content_for? :sidebar
+        %>
+
+        <div id="card-layout-content" class="<%= !content_for?(:sidebar) ? "col-sm-12" : "col-sm-8 col-md-9" %>" data-hook>
+          <%= flash_messages %>
+          <%= yield %>
+        </div>
+
+        <%= yield :templates %>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="options-query" tabindex="-1" role="dialog" aria-labelledby="OptionsQueryLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OptionsQueryLabel">Select an Option</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding:40px 0px ! important">
+            <div class="row">
+              <div class="col-6">
+                <button id="edit-img-btn" class="btn btn-sm btn-info" data-dismiss="modal">Edit Image</button>
+              </div>
+              <div class="col-6">
+                <button id="change-img-btn" class="btn btn-sm btn-info" data-dismiss="modal">Change Image</button>
+              </div>
+            </div>
+          </div>
+          <!--<div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="error-notify" tabindex="-1" role="dialog" aria-labelledby="ErrorNotifyLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ErrorNotifyLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="ErrorNotifyBody">
+              Errors Encountered. Please add the images.
+          </div>
+          <div class="modal-footer">
+            <button id="close-error-notify" class="btn btn-sm btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'spree/shared/sleekfooter' %>
+  </body>
+</html>

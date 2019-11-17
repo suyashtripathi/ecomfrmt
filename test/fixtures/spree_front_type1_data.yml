@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_preview_id: 1
+  img_upld_id: 1
+  img_ref_id: 1
+  img_zoom: 1.5
+  img_rotate: 1
+  rotated_x: 1
+  rotated_y: 1
+  rotated_w: 1
+  rotated_h: 1
+  img_filter: MyString
+  ta_1_text: MyString
+  ta_1_font: MyString
+  ta_1_fontsize: 1
+  ta_1_fontstyle: MyString
+  ta_1_align: MyString
+  ta_1_rotation: MyString
+  ta_1_color: MyString
+
+two:
+  card_preview_id: 1
+  img_upld_id: 1
+  img_ref_id: 1
+  img_zoom: 1.5
+  img_rotate: 1
+  rotated_x: 1
+  rotated_y: 1
+  rotated_w: 1
+  rotated_h: 1
+  img_filter: MyString
+  ta_1_text: MyString
+  ta_1_font: MyString
+  ta_1_fontsize: 1
+  ta_1_fontstyle: MyString
+  ta_1_align: MyString
+  ta_1_rotation: MyString
+  ta_1_color: MyString

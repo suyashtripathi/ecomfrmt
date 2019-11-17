@@ -1,0 +1,27 @@
+<!-- Hero Section-->
+<section class="hero">
+  <div class="container">
+    <!-- Hero Content-->
+    <div class="hero-content pb-5 text-center">
+      <h1 class="hero-heading"><%= accurate_title %></h1>
+      <!--<div class="row">
+        <div class="col-xl-8 offset-xl-2"><p class="lead">Your orders in one place.</p></div>
+      </div>-->
+    </div>
+  </div>
+</section>
+<section>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="block-header text-uppercase"><h6><%= Spree.t(:editing_user) %></h6></div>
+    <div class="block-body">
+      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
+      <%= form_for Spree::User.new, :as => @user, :url => spree.user_path(@user), :method => :put do |f| %>
+        <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
+        <div>
+          <%= f.submit Spree.t(:update), :class => 'btn btn-theme' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

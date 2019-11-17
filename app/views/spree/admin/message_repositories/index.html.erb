@@ -1,0 +1,44 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::MessageRepository) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_message_repository), new_object_url, class: "btn-success", icon: 'add' %>
+<% end if can? :create, Spree::MessageRepository %>
+
+<% if @message_repositories.any? %>
+  <table class="table sortable" data-sortable-link="<%= update_positions_admin_message_repositories_url %>">
+    <thead>
+      <tr data-hook="categories_header">
+        <th></th>
+        <th><%= Spree.t(:message_category) %></th>
+        <th><%= Spree.t(:is_visible) %></th>
+        <th><%= Spree.t(:message) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @message_repositories.each do |message_repository|%>
+      <tr id="<%= spree_dom_id message_repository %>" data-hook="category_row">
+        <td class="move-handle text-center">
+          <% if can?(:edit, message_repository) %>
+            <span class="icon icon-move handle"></span>
+          <% end %>
+        </td>
+        <td><%= Spree::MessageCategory.find_by_id(message_repository.msg_category_id).name if !message_repository.msg_category_id.nil? %></td>
+        <td><%= message_repository.is_visible %></td>
+        <td><%= message_repository.message %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(message_repository, no_text: true) if can? :edit, message_repository %>
+          <%= link_to_delete(message_repository, no_text: true) if can? :edit, message_repository %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::MessageRepository)) %>,
+    <%= link_to(Spree.t(:add_one), new_object_url) if can? :create, Spree::MessageRepository %>!
+  </div>
+<% end %>

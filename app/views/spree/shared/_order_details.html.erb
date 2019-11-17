@@ -1,0 +1,154 @@
+
+<!-- Checkout-->
+<section>
+  <div class="steps-data pb-5">
+    <% if order.has_step?("address") %>
+      <div class="col-md-3 col-sm-3 col-xs-6 pb-3" data-hook="order-bill-address">
+        <h6 class="hero-sub-heading"><%= Spree.t(:billing_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless order.completed? %></h6>
+        <%= render 'spree/shared/address', address: order.bill_address %>
+      </div>
+      
+      <% if order.has_step?("delivery") %>
+        <div class="col-md-3 col-sm-3 col-xs-6 pb-3" data-hook="order-ship-address">
+          <h6 class="hero-sub-heading"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless order.completed? %></h6>
+          <%= render 'spree/shared/address', address: order.ship_address %>
+        </div>
+
+        <div class="col-md-3 col-sm-3 col-xs-6 pb-3" data-hook="order-shipment">
+          <h6 class="hero-sub-heading"><%= Spree.t(:shipments) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless order.completed? %></h6>
+          <div class="delivery">
+            <% order.shipments.each do |shipment| %>
+              <div>
+                <%= Spree.t(:shipment_details, stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name) %>
+              </div>
+            <% end %>
+          </div>
+          <%= render 'spree/shared/shipment_tracking', order: order if order.shipped? %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if order.has_step?("payment") %>
+      <div class="col-md-3 col-sm-3 col-xs-6" data-hook="order-payment">
+        <h6 class="hero-sub-heading"><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless order.completed? %></h6>
+        <div class="payment-info">
+          <%= render collection: order.payments.valid, partial: 'spree/shared/payment' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <!--<ul class="custom-nav nav nav-pills mb-5">
+          <li class="nav-item w-25"><a href="checkout1.html" class="nav-link text-sm ">Address</a></li>
+          <li class="nav-item w-25"><a href="checkout2.html" class="nav-link text-sm ">Delivery Method</a></li>
+          <li class="nav-item w-25"><a href="checkout3.html" class="nav-link text-sm ">Payment Method </a></li>
+          <li class="nav-item w-25"><a href="checkout4.html" class="nav-link text-sm active">Order Review</a></li>
+        </ul>-->
+        <div class="mb-5">
+          <div class="cart">
+            <div class="cart-wrapper">
+              <div class="cart-header text-center">
+                <div class="row">
+                  <div class="col-6">Item</div>
+                  <div class="col-2">Price</div>
+                  <div class="col-2">Quantity</div>
+                  <div class="col-2">Total</div>
+                </div>
+              </div>
+              <div class="cart-body">
+                <!-- Products-->
+                <% order.line_items.each do |item| %>
+                  <% variant = item.variant %>
+                  <div class="cart-item">
+                    <div class="row d-flex align-items-center text-center">
+                      <div class="col-6">
+                        <div class="d-flex align-items-center">
+                          <!--<% if item.variant.images.length == 0 %>
+                            <%= link_to small_image(item.variant.product), item.variant.product %>
+                          <% else %>
+                            <%= link_to image_tag(main_app.url_for(item.variant.images.first.url(:small))), item.variant.product %>
+                          <% end %>-->
+                          <% if (!variant.product.product_category.nil? && variant.product.product_category.name == "Card")%>
+                            <% ref_link = "#" %>
+                            <% prvw_class = "open-preview" %>
+                            <% img_width = variant.images[0].attachment.blob.metadata['width'].to_i %>
+                            <% img_height = variant.images[0].attachment.blob.metadata['height'].to_i %>
+                            <% if img_width <= img_height %>
+                              <% card_class = "5x7" %>
+                            <% else %>
+                              <% card_class = "7x5" %>
+                            <% end %>
+                          <% else %>
+                            <% ref_link = product_path(variant.product) %>
+                            <% prvw_class = "" %>
+                            <% card_class = "full" %>
+                          <% end %>
+                          <a href="<%=ref_link%>" class="<%=prvw_class%>">
+                            <div class="item-img-container-<%=card_class%>">
+                              <% if ((variant.images.length == 0) || (variant.product.product_category.nil?) || (!variant.product.product_category.nil? && variant.product.product_category.name != "Card"))%>
+                                <%= small_image(variant.product, class: 'mini-item-img') %>
+                              <% else %>
+                                <% front_img_path = Rails.application.routes.url_helpers.rails_representation_path(item.card_preview.generated_front.variant(resize: '690x490^'), only_path: true) %>
+                                <% inside_img_path = Rails.application.routes.url_helpers.rails_representation_path(item.card_preview.generated_inside.variant(resize: '690x490^'), only_path: true) %>
+
+                                <% if !variant.product.product_category.nil? && variant.product.product_category.name == "Card" && !item.card_preview.nil? && !item.card_preview.generated_front.nil? %>
+                                  <%=# image_tag(main_app.url_for(item.card_preview.generated_front), class: 'mini-item-img')
+                                  %>
+                                  <%= image_tag(Rails.application.routes.url_helpers.rails_representation_path(item.card_preview.generated_front.variant(resize: '690x490^'), only_path: true), class: 'card-item-img-' + card_class, 'data-page-type': card_class, 'data-imgs': {'front': front_img_path, 'inside': inside_img_path}.to_json) %>
+                                <% else %>
+                                  <%= image_tag(main_app.url_for(variant.images.first.url(:small)), class: 'mini-item-img') %>
+                                <% end %>
+                              <% end %>
+                            </div>
+                          </a>
+                          <div class="cart-title text-left"><strong><%= item.name %></strong><br>
+                            <% if !variant.product.product_category.nil? && variant.product.product_category.name == "Card" %>
+                              <span class="text-muted text-sm">Variant: <%= variant.options_text.gsub("card-edit-ctg: ", "") %></span><br>
+                            <% else %>
+                              <span class="text-muted text-sm"><%= truncate(item.description, length: 100) %><br>
+                              <%= "(" + item.variant.options_text + ")" unless item.variant.option_values.empty? %></span>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-2"><%= item.single_money.to_html %></div>
+                      <div class="col-2"><%= item.quantity %>
+                      </div>
+                      <div class="col-2 text-center"><%= item.display_amount.to_html %></div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row"><a href="checkout3.html" class="btn btn-link text-muted"> <i class="fa fa-angle-left mr-2"></i>Back to the delivery method</a><a href="checkout5.html" class="btn btn-theme">Place an order<i class="fa fa-angle-right ml-2"></i></a></div>-->
+      </div>
+      <%= render partial: 'spree/shared/order_summary', locals: { order: order }%>
+    </div>
+  </div>
+</section>
+
+
+  <% if order.all_adjustments.tax.exists? %>
+    <div id="tax-adjustments" data-hook="order_details_tax_adjustments">
+      <% order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
+        <tr class="total">
+          <td colspan="4" align="right" class="text-muted"><%= Spree.t(:tax) %>: <strong><%= label %></strong></td>
+          <td class="total"><span><%= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency) %></span></td>
+        </tr>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div id="order-charges" data-hook="order_details_adjustments">
+    <% order.adjustments.eligible.each do |adjustment| %>
+      <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+      <tr class="total">
+        <td colspan="4" align="right"><strong><%= adjustment.label %></strong></td>
+        <td class="total"><span><%= adjustment.display_amount.to_html %></span></td>
+      </tr>
+    <% end %>
+  </div>

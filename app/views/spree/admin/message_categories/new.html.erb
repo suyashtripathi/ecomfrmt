@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:message_categories), spree.admin_message_categories_url %> /
+  <%= Spree.t(:new_message_category) %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @message_category } %>
+
+<%= form_for [:admin, @message_category] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

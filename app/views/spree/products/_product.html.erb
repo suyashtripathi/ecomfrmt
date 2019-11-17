@@ -1,0 +1,97 @@
+<!--
+<% url = spree.product_path(product, taxon_id: taxon.try(:id)) %>
+<div id="product_<%= product.id %>" class="col-md-3 col-sm-6 col-xs-6 col-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+  <div class="panel panel-default">
+    <% cache(taxon.present? ? [I18n.locale, current_currency, taxon, product] : cache_key_for_product(product)) do %>
+      <div class="panel-body text-center product-body">
+        <%= link_to url, itemprop: "url" do %>
+          <%= small_image(product, itemprop: "image") %><br/>
+          <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>
+        <% end %>
+        <br/>
+      </div>
+      <div class="panel-footer text-center">
+        <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+          <span class="price selling lead" itemprop="price" content="<%= (product.price_in(current_currency).amount.nil?)? 0 : product.price_in(current_currency).amount.to_d %>">
+            <%= display_price(product) %>
+          </span>
+          <span itemprop="priceCurrency" content="<%= current_currency %>"></span>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+-->
+<!-- product-->
+<% url = spree.product_path(product, taxon_id: taxon.try(:id)) %>
+<!--<div class="col-xl-4 col-sm-6 col-6">-->
+<div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+  <!--<% if product.is_it_new != false %>
+    <div class="ribbon ribbon-info">New</div>
+  <% end %>-->
+
+  <%# variant_ids = product.get_variant_ids_with_active_option_values(current_currency)
+  %>
+    <%# byebug
+    %>
+
+  <% variant_ids = @product_variant_ids[product.id] %>
+  <% def_var_id = variant_ids[0] %>
+
+  <% variants_hash = @product_variants_hash[product.id] if !@product_variants_hash.nil?%>
+  <% desc = product.description %>
+  <% front_desc = product.front_desc %>
+  <% inside_desc = product.inside_desc %>
+
+
+  <% showcase_img_path = variants_hash[def_var_id]['images']['Showcase'][0] if (!variants_hash[def_var_id]['images'].nil? && !variants_hash[def_var_id]['images']['Showcase'].nil?) %>
+  <% front_img_path = variants_hash[def_var_id]['images']['Front'][0] if (!variants_hash[def_var_id]['images'].nil? && !variants_hash[def_var_id]['images']['Front'].nil?) %>
+  <% normal_img_path = variants_hash[def_var_id]['images']['Display'][0] if (!variants_hash[def_var_id]['images'].nil? && !variants_hash[def_var_id]['images']['Display'].nil?) %>
+  <% first_variant_img = product.variant_images.first %>
+
+  <% disp_img_url = ((showcase_img_path if !showcase_img_path.nil?)  || (front_img_path if !front_img_path.nil?) || (normal_img_path if !normal_img_path.nil?)) %>
+  <% prod_ctg = !product.product_category.nil? ? product.product_category.name : "" %>
+  <div class="product" id="product-img-<%=product.id%>" data-prod-name="<%=product.name%>" data-prod-slug="<%=product.slug %>" data-prod-url="<%=disp_img_url%>" data-prod-desc="<%=desc%>" data-prod-front-desc="<%=front_desc%>" data-prod-inside-desc="<%=inside_desc%>" data-prod-price="<%= display_price(product) %>" data-prod-org-price="&#x20B9;<%= (((product.price_in(current_currency).amount.nil?)? 0 : product.price_in(current_currency).amount)*(1.15)).round %> " data-prod-ctg="<%=prod_ctg%>" data-var-ids="<%=variant_ids%>" data-vars="<%=variants_hash.to_json%>" data-page-type="<%=variants_hash[def_var_id]['page_type']%>" data-def-var-id="<%=def_var_id%>" data-toggle="modal" data-target="#product-modal">
+    <% cache(taxon.present? ? [I18n.locale, current_currency, taxon, product] : cache_key_for_product(product)) do %>
+      <div class="product-image d-flex justify-content-center">
+        <!--<img src="img/product/serrah-galos-494312-unsplash.jpg" alt="product" class="img-fluid"/>-->
+          <%=# link_to url, itemprop: "url" do
+          %>
+            <%=# small_image(product, itemprop: "image", alt: product.name, class: "img-fluid")
+            %>
+            <%# if (!product.product_category.nil?) && (product.product_category.name == "Card")
+            %>
+              <% card_img_class = (prod_ctg === "Card" ? "img-#{variants_hash[def_var_id]['page_type']}" : "") %>
+              <%= image_tag(disp_img_url, class: "img-fluid mb-3 #{card_img_class}") %>
+            <%# else
+            %>
+              <%=# small_image(product, itemprop: "image")
+              %><br/>
+              <%=# product_image(product, itemprop: "image")
+              %>
+              <%=# image_tag(prod_url, class: 'img-fluid')
+              %><br/>
+            <%# end
+            %>
+            
+            <%=# content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name)
+            %>
+          <%# end
+          %>
+        <div class="product-hover-overlay d-none"><a href="#" class="product-hover-overlay-link"></a>
+          <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-theme btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-theme btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#product-modal" class="btn btn-outline-theme btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-2 text-center">
+        <!--<p class="text-muted text-sm mb-1"><%=product.product_category.name if !product.product_category.nil?%></p>-->
+        <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark"><%=product.name%></a></h3>
+        <span class="text-muted" itemprop="price" content="<%= (product.price_in(current_currency).amount.nil?)? 0 : product.price_in(current_currency).amount.to_d %>">
+          <%= display_price(product) %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- /product-->

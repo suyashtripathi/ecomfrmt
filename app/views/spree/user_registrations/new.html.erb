@@ -1,0 +1,43 @@
+<% @body_id = 'signup' %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
+<!-- Hero Section-->
+<section class="hero">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <!--<ol class="breadcrumb justify-content-center">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Login</li>
+    </ol>-->
+    <!-- Hero Content-->
+    <div class="hero-content pb-5 text-center">
+      <h1 class="hero-heading mb-0">Sign up</h1>
+    </div>
+  </div>
+</section>
+<!-- customer login-->
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="block">
+          <div class="block-header">
+            <h6 class="text-uppercase mb-0">Create an Account</h6>
+          </div>
+          <div id="new-customer" class="block-body">
+            <%= form_for resource, :as => :spree_user, :url => spree.registration_path do |f| %>
+            <div data-hook="signup_inside_form">
+              <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
+              <div><%= f.submit Spree.t(:create), :class => 'btn btn-theme' %></div>
+            </div>
+          <% end %>
+            <div class="text-center mt-5 lead">
+             <%= link_to Spree.t(:login_as_existing), spree.login_path %>
+            </div>
+            <div data-hook="login_extras"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<div class="modal fade" id="preview-section" tabindex="-1" role="dialog" aria-labelledby="previewSectionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-full" role="document">
+    <div class="modal-content">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+        <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+          <use xlink:href="#close-1"> </use>
+        </svg>
+      </button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="previewSectionLabel">Your Card would look like...</h5>
+      </div>
+      <% h_class = (!page_type.nil? ? "h-#{page_type}" : "") %>
+      <div class="modal-body <%=h_class%>">
+        <div id="preview-container" class="owl-carousel owl-theme owl-dots-modern card-slider d-flex justify-content-center">
+          <div class="item d-flex align-items-start overflow-hidden single-img-cont-<%=page_type%>">
+            <%= image_tag('noimage.png', id: 'front') %>
+            <span class="badge badge-pill badge-dark d-mild-none" id="fp-badge">Front Page</span>
+          </div>
+          <div class="item d-flex align-items-start overflow-hidden double-img-cont-<%=page_type%>">
+            <%= image_tag('noimage.png', id: 'inside') %>
+            <span class="badge badge-pill badge-dark d-mild-none" id="ipl-badge">Inside<%=page_type == "5x7"? "-Left Page" : "Page"%></span>
+          </div>
+          <% if page_type == "5x7" %>
+            <div id="ipr-container" class="item d-flex align-items-start overflow-hidden double-img-cont-<%=page_type%> d-block d-sm-none">
+              <%= image_tag('noimage.png', id: 'inside-right', class: '.d-block .d-sm-none') %>
+              <span class="badge badge-pill badge-dark d-mild-none" id="ipr-badge">Inside-Right Page</span>
+            </div>
+          <% end %>
+          <div class="item d-flex align-items-start overflow-hidden single-img-cont-<%=page_type%>">
+            <%= image_tag('noimage.png', id: 'back',) %>
+            <span class="badge badge-pill badge-dark d-mild-none" id="bp-badge">Back Page</span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <% if edit == true %>
+            <div id="card-edit-btn" class="col-6">
+              <button id="edit-card" class="btn btn-outline-theme" style="float:left" type="button" data-dismiss="modal" aria-label="Close">Back</button>
+            </div>
+          <% end %>
+          <% if addtocart == true %>
+            <div id="cart-form" class="col-6" data-hook="cart_form">
+              <%= render partial: 'spree/products/cart_form_cardinit', :locals => {card_preview: card_preview} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>-->
+      </div>
+    </div>
+  </div>
+</div>

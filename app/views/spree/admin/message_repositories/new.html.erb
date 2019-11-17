@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:message_repositories), spree.admin_message_repositories_url %> /
+  <%= Spree.t(:new_message_repository) %>
+<% end %>
+
+<div data-hook="admin_message_repository_new_form_header">
+  <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @message_repository } %>
+</div>
+
+<div data-hook="admin_message_repository_new_form">
+  <%= form_for [:admin, @message_repository] do |f| %>
+    <fieldset>
+      <%= render partial: 'form', locals: { f: f } %>
+
+      <div data-hook="admin_message_repository_new_form_buttons">
+        <%= render partial: 'spree/admin/shared/new_resource_links' %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

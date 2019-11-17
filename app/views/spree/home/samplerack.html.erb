@@ -1,0 +1,59 @@
+<% products = @sample_featured  %>
+<% card_dimensions_prop_id = Spree::Property.find_by_name("card_dimensions").id %>
+
+<h3 style="margin-left:20px;">Sample Previews</h4>
+<h6 style="margin-left:20px;">Click on the cards to see a live preview.</h6>
+
+
+<div class="container-fluid" id="mt-storeview">
+    <% p = 0 %>
+    <% cardsperrow = 4 %>
+    <% products_count = products.count %>
+    <% for r in 1..(products_count%cardsperrow == 0 ? (products_count/cardsperrow):(products_count/cardsperrow)+1) %>
+      <div class="row storeshelflarge" style="display:table;width:100%">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <% cascade_margin = 0 %>
+            <% zindexval = 999 %>
+            <% for s in 1..4 %>
+              <% if p < products_count %>
+                <% product = products[p] %>
+                <% card_dimensions_prop = product.product_properties.find_by_property_id(card_dimensions_prop_id) %>
+                <% card_dimensions = card_dimensions_prop.value if !(card_dimensions_prop.nil?) %>
+                <% if (s == 1) and (card_dimensions == "7x5") %>
+                  <% cascade_margin = 30 %>
+                <% end %>            
+                <div id="product_<%= product.id %>" class="col-md-3" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product" style="text-align:center;">
+                  <% if card_dimensions == "5x7" %>
+                    <% shadowmargin57 = -50 + cascade_margin %>
+                    <%= image_tag("card-shadow-small-5x7.png", style: "position:absolute;margin-left:#{shadowmargin57}px;margin-top:-2px;z-index:#{zindexval}") %> 
+                    <% product_img_class = "sample-rack-5x7" %>    
+                  <% else %>
+                    <% shadowmargin75 = -47 + cascade_margin %>
+                    <%= image_tag("card-shadow-small-7x5.png", style: "position:absolute;margin-left:#{shadowmargin75}px;margin-top:58px;z-index:#{zindexval}") %> 
+                    <% product_img_class = "sample-rack-7x5" %>                       
+                  <% end %>            
+                  <% if !(product.variants.where(:sku => "showcase").empty?) and !(product.variants.where(:sku => "showcase").first.images.empty?) %>   
+                    <% image_type = "showcase" %>
+                  <% else %>
+                    <% image_type = "front"  %>      
+                  <% end %>
+                  <% image_src_attachment = product.variants.where(:sku => "#{image_type}").first.images.first.attachment %>
+                  <% modal_img_url_path = image_src_attachment.url(:medium) %>
+                  <% inner_src_attachment = product.variants.where(:sku => "inside").first.images.first.attachment %>
+                  <% modal_inner_img_url_path = inner_src_attachment.url(:medium) %>
+                  <%= link_to image_tag(image_src_attachment.url(:product), :itemprop => "image", class: "thin-border #{product_img_class}", style: "margin-left:#{cascade_margin}px;z-index:#{zindexval};position:relative;"), preview_path(product.permalink) %>
+                </div> 
+                <% p = p+1 %>
+                <% zindexval = zindexval - 1 %>
+              <% end %>           
+            <% end %>  
+          </div> 
+        </div>
+        <div class="col-md-1">
+        </div>  
+      </div>
+    <% end %>
+</div>

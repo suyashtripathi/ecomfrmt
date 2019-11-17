@@ -1,0 +1,30 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="cart mb-5">
+          <div class="cart-header text-center">
+            <div class="row">
+              <div class="col-md-5">Item</div>
+              <div class="col-md-7 d-none d-md-block">
+                <div class="row">
+                  <div class="col-md-3">Price</div>
+                  <div class="col-md-4">Quantity</div>
+                  <div class="col-md-3">Total</div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart-body">
+            <%= render partial: 'spree/orders/line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
+          </div>
+        </div>
+      </div>
+      <%= render partial: 'spree/shared/order_summary', locals: { order: @order }%>
+
+    </div>
+  </div>
+</section>
+

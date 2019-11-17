@@ -1,0 +1,26 @@
+<tr class="photo_cfg fields" id="spree_<%= dom_id(f.object) %>" data-hook="photo_cfg">
+  <td class='value'>
+    <%= f.text_field :x, class: 'form-control' %>
+  </td>
+  <td class='value'>
+    <%= f.text_field :y, class: 'form-control' %>
+  </td>
+  <td class='value'>
+    <%= f.text_field :w, class: 'form-control' %>
+  </td>
+  <td class='value'>
+    <%= f.text_field :h, class: 'form-control' %>
+  </td>
+  <td class='value'>
+    <%= f.text_field :z, class: 'form-control' %>
+  </td>
+  <td class='value'>
+    <%= f.text_field :page, class: 'form-control' %>
+  </td>
+  
+  <td class="actions actions-1">
+    <% if f.object.persisted? && can?(:destroy, f.object) %>
+      <%= link_to_delete f.object, no_text: true %>
+    <% end %>
+  </td>
+</tr>

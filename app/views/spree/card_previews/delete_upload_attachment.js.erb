@@ -1,0 +1,5 @@
+$('#picsuploaded' + ' img[data-img="<%= @img_id %>"]').remove()
+$('#picsuploaded' + ' a[data-img="<%= @img_id %>"]').remove()
+deletePlaceholderImg(<%= @img_id %>)
+$('#picsuploaded' + ' div[data-img="<%= @img_id %>"]').remove()
+showHideNoUploadsText()

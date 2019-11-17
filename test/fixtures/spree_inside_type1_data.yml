@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_preview_id: 1
+  ta_1_text: MyString
+  ta_1_font: MyString
+  ta_1_fontsize: 1
+  ta_1_fontstyle: MyString
+  ta_1_align: MyString
+  ta_1_rotation: MyString
+  ta_1_color: MyString
+  ta_2_text: MyString
+  ta_2_font: MyString
+  ta_2_fontsize: 1
+  ta_2_fontstyle: MyString
+  ta_2_align: MyString
+  ta_2_rotation: MyString
+  ta_2_color: MyString
+  ta_3_text: MyString
+  ta_3_font: MyString
+  ta_3_fontsize: 1
+  ta_3_fontstyle: MyString
+  ta_3_align: MyString
+  ta_3_rotation: MyString
+  ta_3_color: MyString
+
+two:
+  card_preview_id: 1
+  ta_1_text: MyString
+  ta_1_font: MyString
+  ta_1_fontsize: 1
+  ta_1_fontstyle: MyString
+  ta_1_align: MyString
+  ta_1_rotation: MyString
+  ta_1_color: MyString
+  ta_2_text: MyString
+  ta_2_font: MyString
+  ta_2_fontsize: 1
+  ta_2_fontstyle: MyString
+  ta_2_align: MyString
+  ta_2_rotation: MyString
+  ta_2_color: MyString
+  ta_3_text: MyString
+  ta_3_font: MyString
+  ta_3_fontsize: 1
+  ta_3_fontstyle: MyString
+  ta_3_align: MyString
+  ta_3_rotation: MyString
+  ta_3_color: MyString

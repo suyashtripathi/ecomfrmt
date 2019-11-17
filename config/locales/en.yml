@@ -1,0 +1,73 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  spree:
+    hello: "Hello world"
+    x_info: "x"
+    y_info: "y"
+    w_info: "w"
+    h_info: "h"
+    z_info: "z"
+    page: "page"
+    position: "position"
+    photo_cfg_info: "Photo Configuration Info"
+    add_photo_config: "Add Photo Config"
+    photo_cfg: "Photo Configuration"
+    add_text_config: "Add Text Config"
+    text_cfg: "Text Configuration"
+    inside_tpl_cfgs: "Inside Templates Configuration(s)"
+    inside_tpl_cfg: "Inside Template Configuration"
+    new_inside_tpl_cfg: "New Inside Template"
+    product_category: "Product Category"
+    new_product_category: "New Product Category"
+    product_categories: "Product Categories"
+    message_category: "Message Category"
+    message_categories: "Message Categories"
+    new_message_category: "New Message Category"
+    asset_view_type: "Asset View Type"
+    asset_view_types: "Asset View Types"
+    make_my_card: "Make My Card"
+    is_it_new: "Is it new"
+    new_to_mangotwins: "New to Mangotwins"
+    firstname: "First Name"
+    lastname: "Last Name"
+    mobile_num: "Mobile Number"
+    profile: "Profile"
+    package_content: "Package Contents"
+    front_desc: "Front Description"
+    inside_desc: "Inside Description"
+    new_message: "New Message"
+    is_visible: "is visible"
+    shipping_address_same_as_billing_address: "Shipping Address same as Billing Address"
+    add_photoarea: "Add Photoarea"
+    update_quantity: "Update Quantity"
+

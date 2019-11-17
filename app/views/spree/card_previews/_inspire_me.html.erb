@@ -1,0 +1,47 @@
+<div class="modal fade" id="ideasModal" tabindex="-1" role="dialog" aria-labelledby="ideasModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+				<svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+					<use xlink:href="#close-1"> </use>
+				</svg>
+			</button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="ideasModalLabel">Message Inspirations</h5>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionInspireMe">
+          <% @msg_ctg_list.each do |msg_ctg| %>
+            <% if @msgs_repository[msg_ctg.name].count > 0 %>
+              <div class="card">
+                <div class="card-header" id="heading<%="#{msg_ctg.name}"%>" data-toggle="collapse" data-target="#collapse<%=msg_ctg.name%>" aria-expanded="true" aria-controls="collapse<%=msg_ctg.name%>">
+                  <h2 class="mb-0">
+                    <button class="btn collapsed" type="button" >
+                      <%= msg_ctg.name %>
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapse<%=msg_ctg.name%>" class="collapse" aria-labelledby="heading<%=msg_ctg.name%>" data-parent="#accordionInspireMe">
+                  <% @msgs_repository[msg_ctg.name].each do |msg| %>
+                    <div class="card-body">
+                      <p class="add-to-tb-text"><%= msg %></p>
+                      <div class="text-right">
+                        <button class="add-to-tb btn btn-outline-theme btn-sm">Add to Textbox</button>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="msg-notify-container">
+  <span class="badge badge-pill badge-dark"  style="display:none">Message added to TextBox</span>
+</div>

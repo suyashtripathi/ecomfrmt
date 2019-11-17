@@ -1,0 +1,18 @@
+<!-- Footer-->
+<footer class="main-footer">
+  <!-- Services block-->
+  <div class="bg-gray-100 text-dark-700 py-6">
+    <div class="container">
+      <div class="row">
+        <nav class="navbar fixed-bottom navbar-light bg-light">
+          <!--<button id="back-to-browsing" class="btn btn-theme float-left">Back</button>-->
+          <%= link_to 'Back', request.headers["Referer"] || spree.root_path, :class => "btn btn-theme", id: "back-to-browsing" %>
+          <button id="saveprvw" class="btn btn-theme float-right">Preview</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+</footer>
+<!-- /Footer end-->
+

@@ -1,0 +1,104 @@
+
+
+<!---------------------->
+<!--<section>
+  <div class="row">
+    <div class="col-lg-8">-->
+      <!--<ul class="custom-nav nav nav-pills mb-5">
+        <li class="nav-item w-25"><a href="#" class="nav-link text-sm active">Address</a></li>
+        <li class="nav-item w-25"><a href="#" class="nav-link text-sm disabled">Delivery Method</a></li>
+        <li class="nav-item w-25"><a href="#" class="nav-link text-sm disabled">Payment Method </a></li>
+        <li class="nav-item w-25"><a href="#" class="nav-link text-sm disabled">Order Review</a></li>
+      </ul>-->
+      <%=# checkout_progress
+      %>
+      <!--<form action="#">-->
+        <div class="block">
+          <!-- Email -->
+          <% if @order.state == 'address' || !@order.email? %>
+            <div id="email">
+              <div class="block-header">
+                <h6 class="text-uppercase mb-0"><%= Spree.t(:email) %></h6>
+              </div>
+              <div class="block-body">
+                <div class="form-group">
+                    <%= form.email_field :email, class: 'form-control', required: true %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          
+          <!-- Invoice Address-->
+          <div id="billing" data-hook="billing_fieldset_wrapper">
+            <%= form.fields_for :bill_address do |bill_form| %>
+              <div class="block-header">
+                <h6 class="text-uppercase mb-0"><%= Spree.t(:billing_address) %></h6>
+              </div>
+              <div class="block-body">
+                <%= render partial: 'spree/address/form', locals: { form: bill_form, address_type: 'billing', address: @order.bill_address } %>
+              </div>
+            <% end %>
+            <div class="form-group col-12">
+              <!--<div class="custom-control custom-checkbox">
+                <input id="show-shipping-address" type="checkbox" name="product-items" class="custom-control-input">
+                <label for="show-shipping-address" data-toggle="collapse" data-target="#shippingAddress" aria-expanded="false" aria-controls="shippingAddress" class="custom-control-label align-middle">Use a different shipping address</label>
+              </div>-->
+            </div>
+          </div>
+          <!-- /Invoice Address-->
+          <!-- Shippping Address-->
+          <div id="shippingAddress">
+            <div id="shipping" data-hook="shipping_fieldset_wrapper">
+              <%= form.fields_for :ship_address do |ship_form| %>
+                <div class="block-header">
+                  <h6 class="text-uppercase mb-0"><%= Spree.t(:shipping_address) %></h6>
+                </div>
+                <div class="custom-checkbox mt-3">
+                  <input type="checkbox" id="order_use_billing" name="order[use_billing]" value="1" checked="@order.shipping_eq_billing_address?">
+                  <label id="label-shipping-same-as-billing" for="order_use_billing"><%= Spree.t(:shipping_address_same_as_billing_address) %></label>
+                </div>
+                <!--<div class="custom-checkbox" data-hook="use_billing">
+                  <%= label_tag :order_use_billing, id: 'use_billing' do %>
+                    <%= check_box_tag 'order[use_billing]', '1', @order.shipping_eq_billing_address? %>
+                    <%= Spree.t(:use_billing_address) %>
+                  <% end %>
+                </div>-->
+                <div class="block-body">
+                  <%= render partial: 'spree/address/form', locals: { form: ship_form, address_type: 'shipping', address: @order.ship_address } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- /Shipping Address-->
+        </div>
+        <div class="form-group links my-3 d-flex justify-content-between flex-column flex-lg-row" data-hook="buttons">
+          <% if try_spree_current_user %>
+            <div data-hook="save_user_address" class='save-user-address-wrapper custom-checkbox'>
+              <%= check_box_tag 'save_user_address', '1', try_spree_current_user.respond_to?(:persist_order_address) %>
+              <%= label_tag :save_user_address, Spree.t(:save_my_address) %>
+            </div>
+          <% end %>
+          <%= submit_tag Spree.t(:save_and_continue), class: 'btn btn-theme mt-3' %>
+        </div>
+        <!--<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row"><a href="cart.html" class="btn btn-link text-muted"> <i class="fa fa-angle-left mr-2"></i>Back </a><a href="checkout2.html" class="btn btn-theme">Choose delivery method<i class="fa fa-angle-right ml-2"></i></a></div>-->
+      <!--</form>-->
+    <!--</div>-->
+    <!--<div class="col-lg-4">
+      <div class="block mb-5">
+        <div class="block-header">
+          <h6 class="text-uppercase mb-0">Order Summary</h6>
+        </div>
+        <div class="block-body bg-light pt-1">
+          <p class="text-sm">Shipping and additional costs are calculated based on values you have entered.</p>
+          <ul class="order-summary mb-0 list-unstyled">
+            <li class="order-summary-item"><span>Order Subtotal </span><span>$390.00</span></li>
+            <li class="order-summary-item"><span>Shipping and handling</span><span>$10.00</span></li>
+            <li class="order-summary-item"><span>Tax</span><span>$0.00</span></li>
+            <li class="order-summary-item border-0"><span>Total</span><strong class="order-summary-total">$400.00</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+    <!--</div>
+  </div>
+</section>-->

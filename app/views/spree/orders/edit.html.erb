@@ -1,0 +1,124 @@
+<% @body_id = 'cart' %>
+
+<div data-hook="cart_container">
+  <section class="hero">
+    <div class="container">
+      <!-- Breadcrumbs -->
+      <!--<ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Shopping cart        </li>
+      </ol>-->
+      <!-- Hero Content-->
+      <div class="hero-content pb-5 text-center">
+        <h1 class="hero-heading">Shopping cart</h1>
+      </div>
+    </div>
+  </section>
+
+  <% if @order.line_items.empty? %>
+    <div data-hook="empty_cart">
+      <div class="alert alert-info"><%= Spree.t(:your_cart_is_empty) %></div>
+      <p><%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-default' %></p>
+    </div>
+  <% else %>
+    <div data-hook="outside_cart_form">
+      <%= form_for @order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+        <div data-hook="inside_cart_form">
+
+          <div data-hook="cart_items" class="table-responsive">
+            <%= render partial: 'form', locals: { order_form: order_form } %>
+          </div>
+
+          <!--<div class="links col-md-3 navbar-form pull-right text-right" data-hook="cart_buttons">
+            <div class="form-group">
+              <%=# button_tag class: 'btn btn-primary', id: 'update-button' do
+              %>
+                <%=# Spree.t(:update)
+                %>
+              <%# end
+              %>
+              <%=# button_tag class: 'btn btn-lg btn-success', id: 'checkout-link', name: 'checkout' do
+              %>
+                <%= Spree.t(:checkout) %>
+              <%# end
+              %>
+            </div>
+          </div>-->
+          <!-- Update/Checkout Buttons before summary -->
+          <div data-hook="cart_buttons" class="container">
+            <div class="form-group links col-lg-8 my-5 d-flex justify-content-between flex-column flex-lg-row">
+              <%= button_tag class: 'btn btn-outline-theme my-4 text-muted', id: 'update-button' do %>
+                <%= Spree.t(:update_quantity) %>
+              <% end %>
+              <%= button_tag class: 'btn btn-theme my-4', id: 'checkout-link', name: 'checkout' do %>
+                <%= Spree.t(:checkout) %>
+              <% end %>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+          <!--<div class="my-5 d-flex justify-content-between flex-column flex-lg-row"><a href="<%=spree.root_path%>" class="btn btn-link text-muted"><i class="fa fa-chevron-left"></i> Continue Shopping</a>--><!--<a href="checkout1.html" class="btn btn-theme">Proceed to checkout <i class="fa fa-chevron-right"></i></a>--><!--</div>-->
+        </div>
+
+          <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
+            <div class="container my-5">
+              <div class='col-lg-8 form-inline' data-hook='coupon_code'>
+                <label>
+                  <%=# order_form.label :coupon_code
+                  %>
+                  <%= order_form.text_field :coupon_code, size: '30', class: 'form-control', placeholder: "Coupon Code" %>
+                  <%= button_tag Spree.t(:coupon_code_apply), class: 'btn text-muted' %>
+                </label>
+              </div>
+              <div class="col-lg-4">
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <!--<div class="container">
+      <div id="empty-cart" class="col-lg-8 pull-left my-5 d-flex justify-content-between flex-column flex-lg-row" data-hook>
+        <%= form_tag empty_cart_path, method: :put do %>
+          <div class="col-6" id="clear_cart_link" data-hook>
+            <%= submit_tag Spree.t(:empty_cart), class: 'btn btn btn-outline-theme text-muted' %>
+            <%= Spree.t(:or) %>
+          </div>
+        <% end %>
+        <div class="col-6">
+          <%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-outline-theme text-muted ' %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>-->
+  <% end %>
+  <div class="row">
+    <% choco_prod_ctg_id = Spree::ProductCategory.find_by_name("Chocolate").id %>
+    <% if !choco_prod_ctg_id.nil? %>
+      
+      <% choco_products = Spree::ProductCategory.find_by_id(choco_prod_ctg_id).products %>
+      <% products_count = choco_products.count %>
+      <% if !choco_products.blank? %>
+        <h3>Would you like to add some Chocolates?</h3>
+          <% for i in 0..(products_count) %>
+            <% @product = choco_products[i] %>
+            <div class="col-md-3 col-sm-3 col-xs-3" style="border:1px solid lightgray">
+            <% if !@product.blank? %>
+              <%= image_tag(main_app.url_for(@product.images[0].url(:mini)), class: 'thumbnail') %>
+              <%= render 'spree/products/cart_form' %>
+            <% end %>
+            </div>
+          <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div id="previewarea" class="preview-elm">
+  <%= render partial: 'spree/shared/previewcore', :locals => {edit: false, addtocart: false, page_type: nil, card_preview: nil} %>
+</div>
+
+<script>
+  Spree.current_order_id = "<%= @order.number %>"
+  Spree.current_order_token = "<%= @order.token %>"
+</script>

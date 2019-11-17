@@ -1,0 +1,420 @@
+<!--<div id="spree-header">
+  <header id="header" data-hook>
+    <div class="container">
+      <div class="row">
+        <figure id="logo" class="col-md-4 col-sm-3" data-hook>
+          <%= logo %>
+        </figure>
+        <%= render partial: 'spree/shared/nav_bar' %>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <%= render partial: 'spree/shared/main_nav_bar' %>
+  </div>
+</div>-->
+<%= render partial: 'spree/shared/icons' %>
+<!-- Start Header Area -->
+	<header class="header">
+      <!-- Top Bar-->
+      <div id="text-editor" class="mt-top-bar fixed-top">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="btn-group" role="group" aria-label="Text Editing Options">
+              <button id="btnGroupDrop1" type="button" class="btn btn-gray-200 w-6rem dropdown-toggle d-flex align-items-center justify-content-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <figure class="figure">
+                  <svg class="svg-icon service-icon">
+                    <use xlink:href="#text-style"> </use>
+                  </svg>
+                  <figcaption class="figure-caption text-center">Edit</figcaption>
+                </figure>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                <a class="dropdown-item font-rg" href="#" data-toggle="modal" data-target=".bd-font-modal-sm">Font</a>
+                <a class="dropdown-item font-rg" href="#" data-toggle="modal" data-target=".bd-size-modal-sm">Size</a>
+                <a class="dropdown-item font-rg" href="#" data-toggle="modal" data-target=".bd-color-modal-sm">Color</a>
+                <a class="dropdown-item font-rg" href="#" data-toggle="modal" data-target=".bd-align-modal-sm">Align</a>
+              </div>
+              <button type="button" class="btn btn-gray-200 w-6rem d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#ideasModal">
+                <figure class="figure">
+                  <svg class="svg-icon service-icon">
+                    <use xlink:href="#add-msg"> </use>
+                  </svg>
+                  <figcaption class="figure-caption text-center">Inspire</figcaption>
+                </figure>
+              </button>
+              <button type="button" id="clear-ta-content" class="btn btn-gray-200 w-6rem d-flex align-items-center justify-content-center">
+                <figure class="figure">
+                  <svg class="svg-icon service-icon">
+                    <use xlink:href="#clear-box"> </use>
+                  </svg>
+                  <figcaption class="figure-caption text-center">Clear</figcaption>
+                </figure>
+              </button>
+            </div>
+            <button type="button" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <!--<div class="col-7">
+              <a href="<%=spree.root_path%>" class="navbar-brand">-->
+              <!--<%=# image_tag('mtlogonew.png')
+              %></a>
+            </div>-->
+            <!--<div id="topbar-heading" class="col-5 d-flex justify-content-end">
+            Personalize
+            </div>-->
+          </div>
+        </div>
+      </div>
+      <div id="photo-editor" class="mt-top-bar fixed-top">
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="btn-group" role="group" aria-label="Photo Editing Options">
+              <!--<div class="uploads-container" role="group">-->
+                <button type="button" class="btn btn-gray-200 w-6rem d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#upload-section">
+                  <figure class="figure">
+                    <svg class="svg-icon service-icon">
+                      <use xlink:href="#upload-img"> </use>
+                    </svg>
+                    <figcaption class="figure-caption text-center">Photos</figcaption>
+                  </figure>
+                </button>
+                <!--<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                </div>-->
+              <!--</div>-->
+              <!--<div class="edit-tools-container" role="group">-->
+                <button type="button" class="img-utils-btn btn btn-gray-200 w-6rem d-flex align-items-center justify-content-center" data-target-ref="#img-zoom-rotate">
+                  <figure class="figure">
+                    <svg class="svg-icon service-icon">
+                      <use xlink:href="#edit-img"> </use>
+                    </svg>
+                    <figcaption class="figure-caption text-center">Edit</figcaption>
+                  </figure>
+                </button>
+              <!--</div>-->
+              <button type="button" class="img-utils-btn btn btn-gray-200 w-6rem d-flex align-items-center justify-content-center" data-target-ref="#img-filters">
+                <figure class="figure">
+                  <svg class="svg-icon service-icon" style="margin-top:-3px;margin-bottom:4px;">
+                    <use xlink:href="#img-effects"> </use>
+                  </svg>
+                  <figcaption class="figure-caption text-center">Filters</figcaption>
+                </figure>
+              </button>
+            </div>
+            <button type="button" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <!--<div class="col-7">
+              <a href="<%=spree.root_path%>" class="navbar-brand">-->
+              <!--<%=# image_tag('mtlogonew.png')
+              %></a>
+            </div>-->
+            <!--<div id="topbar-heading" class="col-5 d-flex justify-content-end">
+            Personalize
+            </div>-->
+          </div>
+        </div>
+      </div>
+      <!-- Top Bar End-->
+      <!--
+      <div id="photo-editor" class="close-wrap-div container fixed-bottom">
+        <div class="top-text-bar row">
+          <div class="col-3">
+          &nbsp;
+          </div>
+          <div class="editor-header text-center col-6">
+            Photo Editor
+          </div>
+          <div class="col-3">
+            <button class="tb-minmax" type="button" data-toggle="collapse" data-target="#pe-body" role="button" aria-expanded="true" aria-controls="pe-body">
+              <i class="fa fas fa-minus"></i>
+              <i class="fa fas fa-plus"></i>
+            </button>
+            <button type="button" class="close px-2" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div id="pe-body" class="editor-body show">
+          <div id="eb-edit-tools">
+            <div class="sliders-wrapper text-center row py-3" onmousedown="event.stopPropagation()" onmouseup="event.stopPropagation()" onmousemove="event.stopPropagation()" >
+              
+              <div class="range-slider col-6">
+                <div id="rotation-slider"></div>
+              </div>
+
+              <div class="range-slider col-6">
+                <div id="zoom-slider"></div>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-around text-center">
+              <div class="col-4">
+                <button id="upload-area" class="btn btn-sm btn-outline-theme">Uploads</button>
+              </div>
+              <div class="col-4">
+                <button id="reset-photo" class="btn btn-sm btn-outline-theme">Reset</button>
+              </div>
+              <div class="col-4">
+                <button id="clear-photo" class="btn btn-sm btn-outline-theme">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div id="eb-img-uploads">
+            <%= render 'photouploader'%>
+            <div id="no-uploads-text" class="col-12 <%=@uploaded_images.count > 0 ? 'hidecls': ''%>">No Images Uploaded.</div>
+            <div id="form-wrapper" class="row d-flex justify-content-around text-center">
+              <div class="col-6">
+                <%= form_with model: @card_preview, :url => spree.cardpicsupload_path, id: 'picupload', remote: true, data: { type: :json }  do |form| %>
+                  <div class="field m-2">
+                    <%= form.file_field :uploads, multiple: true, direct_upload: true, title: "Upload File" %>
+                  </div>
+                  <div class="actions m-2">
+                    <%= form.submit 'Upload', id:'upload-submit', class: 'btn btn-sm btn-info button d-none'%>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-6">
+                <button id="edit-area" class="btn btn-sm btn-outline-theme m-2">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      -->
+      
+      <!-- Fullscreen search area-->
+      <div class="search-area-wrapper">
+        <div class="search-area d-flex align-items-center justify-content-center">
+          <div class="close-btn">
+            <svg class="svg-icon svg-icon-light w-3rem h-3rem">
+              <use xlink:href="#close-1"> </use>
+            </svg>
+          </div>
+          <form action="#" class="search-area-form">
+            <div class="form-group position-relative">
+              <input type="search" name="search" id="search" placeholder="What are you looking for?" class="search-area-input">
+              <button type="submit" class="search-area-button">
+                <svg class="svg-icon">
+                  <use xlink:href="#search-1"> </use>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /Fullscreen search area-->
+      <!--Text Editing Modals-->
+      <div class="modal fade bd-font-modal-sm" tabindex="-1" role="dialog" aria-labelledby="fontSelectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Select a Font</h5>
+            </div>
+            <div class="modal-body">
+              <div class="font-sel lvfont p-3 font-lg active" data-val-type="font-family"  data-value="Lavanderia" style="font-size:26px;">Lavanderia</div>
+              <div class="font-sel cafont p-3 font-lg" data-val-type="font-family" data-value="Carried Away">Carried Away</div>
+              <div class="font-sel ddfont p-3 font-lg" data-val-type="font-family" data-value="Daydreamer" style="font-size:26px;">Daydreamer</div>
+              <div class="font-sel ppfont p-3 font-lg" data-val-type="font-family" data-value="Peach And Pistachio" style="font-size:35px;">Peach And Pistachio</div>
+              <div class="font-sel ssfont p-3 font-lg" data-val-type="font-family" data-value="Smoothy Script">Smoothy Script</div>
+              <div class="font-sel gdfont p-3 font-lg" data-val-type="font-family" data-value="Grounday">Grounday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade bd-size-modal-sm" tabindex="-1" role="dialog" aria-labelledby="sizeSelectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Select text size</h5>
+            </div>
+            <div class="modal-body">
+              <div class="size-sel font-rg p-3 active" data-val-type="font-size" data-value="Normal">Normal</div>
+              <div class="size-sel font-lg p-3" data-val-type="font-size" data-value="Large">Large</div>
+              <div class="size-sel font-hg p-3" data-val-type="font-size" data-value="Huge">Huge</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade bd-color-modal-sm" tabindex="-1" role="dialog" aria-labelledby="colorSelectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Select Text Color</h5>
+            </div>
+            <div class="modal-body">
+              <div class="color-sel font-rg d-flex align-items-center p-3 active" data-val-type="color" data-value="#000"><i class="fa fa-2x fa-circle" style="color:#000"></i><span class="ml-3">Black</span></div>
+              <div class="color-sel font-rg d-flex align-items-center p-3" data-val-type="color" data-value="#333333"><i class="fa fa-2x fa-circle" style="color:#333333"></i><span class="ml-3">Gray</span></div>
+              <div class="color-sel font-rg d-flex align-items-center p-3" data-val-type="color" data-value="#000066"><i class="fa fa-2x fa-circle" style="color:#000066"></i><span class="ml-3">Blue</span></div>
+              <div class="color-sel font-rg d-flex align-items-center p-3" data-val-type="color" data-value="#663333"><i class="fa fa-2x fa-circle" style="color:#663333"></i><span class="ml-3">Brown</span></div>
+              <div class="color-sel font-rg d-flex align-items-center p-3" data-val-type="color" data-value="#FFF"><i class="fa fa-2x fa-circle" style="color:#FFF;border:1px solid gray;border-radius:20px"></i><span class="ml-3">White</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade bd-align-modal-sm" tabindex="-1" role="dialog" aria-labelledby="alignSelectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Align Text</h5>
+            </div>
+            <div class="modal-body">
+              <div class="align-sel font-rg d-flex align-items-center p-3 active" data-val-type="text-align" data-value="left"><i class="fa fa-lg fa-align-left"></i><span class="ml-3">Left</span></div>
+              <div class="align-sel font-rg align-items-center p-3" data-val-type="text-align" data-value="center"><i class="fa fa-lg fa-align-center"></i><span class="ml-3">Center</span></div>
+              <div class="align-sel font-rg align-items-center p-3" data-val-type="text-align" data-value="right"><i class="fa fa-lg fa-align-right"></i><span class="ml-3">right</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="upload-section" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="uploadSectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Select/Upload Image</h5>
+            </div>
+            <div class="modal-body">
+              <div id="eb-img-uploads">
+                <%= render 'spree/card_previews/photouploader'%>
+                <div id="no-uploads-text" class="col-12 <%=@uploaded_images.count > 0 ? 'hidecls': ''%>">No Images Uploaded. Click on Upload File Button to upload.</div>
+                <div id="form-wrapper" class="row d-flex justify-content-around text-center mt-4">
+                  <div class="col-12 text-left">
+                    <%= form_with model: @card_preview, :url => spree.cardpicsupload_path, id: 'picupload', remote: true, data: { type: :json }  do |form| %>
+                      <div class="field m-2">
+                        <%= form.file_field :uploads, multiple: true, direct_upload: true, title: "Upload File" %>
+                      </div>
+                      <div class="actions m-2">
+                        <%= form.submit 'Upload', id:'upload-submit', class: 'btn btn-sm btn-info button d-none'%>
+                      </div>
+                    <% end %>
+                  </div>
+                  <!--<div class="col-6">
+                    <button id="edit-area" class="btn btn-sm btn-outline-theme m-2">Edit</button>
+                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="img-zoom-rotate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="imgEditSectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Image</h5>
+            </div>
+            <div class="modal-body">
+              <div id="eb-edit-tools">
+                <div class="sliders-wrapper text-center row py-3"  >
+                  
+                  <div class="range-slider col-6">
+                    <div id="rotation-slider"></div>
+                    <div class="text-center mt-2 text-muted">Rotate</div>
+                  </div>
+
+                  <div class="range-slider col-6">
+                    <div id="zoom-slider"></div>
+                    <div class="text-center mt-2 text-muted">Zoom</div>
+                  </div>
+                </div>
+                <div class="row d-flex justify-content-around text-center">
+                  <!--<div class="col-4">
+                    <button id="upload-area" class="btn btn-sm btn-outline-theme">Uploads</button>
+                  </div>-->
+                  <div class="col-6">
+                    <button id="reset-photo" class="btn btn-sm btn-outline-theme">Reset</button>
+                  </div>
+                  <div class="col-6">
+                    <button id="clear-photo" data-dismiss="modal" class="btn btn-sm btn-outline-theme">Clear</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="img-filters" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="imgEffectsSectionModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
+              <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title">Filters</h5>
+            </div>
+            <div class="modal-body">
+              <div id="eb-filters">
+                <div class="row d-flex justify-content-center text-center">
+                  <div class="col-4">
+                    <figure class="figure">
+                      <svg class="svg-icon svg-icon-light w-3rem h-3rem original mt-2 filter-sel" data-filter="original">
+                        <use xlink:href="#image-file"> </use>
+                      </svg>
+                      <figcaption class="figure-caption text-center">Original</figcaption>
+                      <figcaption><i class="fa fa-circle dot"></i></figcaption>
+                    </figure>
+                  </div>
+                  <div class="col-4">
+                    <figure class="figure">
+                      <svg class="svg-icon svg-icon-light w-3rem h-3rem grayscale mt-2 filter-sel" data-filter="grayscale">
+                        <use xlink:href="#image-file"> </use>
+                      </svg>
+                      <figcaption class="figure-caption text-center">GrayScale</figcaption>
+                      <figcaption><i class="fa fa-circle dot"></i></figcaption>
+                    </figure>
+                  </div>
+                  <div class="col-4">
+                    <figure class="figure">
+                      <svg class="svg-icon svg-icon-light w-3rem h-3rem sepiatone mt-2 filter-sel" data-filter="sepia">
+                        <use xlink:href="#image-file"> </use>
+                      </svg>
+                      <figcaption class="figure-caption text-center">Sepia</figcaption>
+                      <figcaption><i class="fa fa-circle dot"></i></figcaption>
+                    </figure>
+                  </div>
+                  <!--<div class="col-12 text-right">
+                    <button class="btn btn-sm btn-outline-theme" data-dismiss="modal">Done</button>
+                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+	<!-- End Header Area -->

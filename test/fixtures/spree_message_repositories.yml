@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  msg_category_id: 1
+  message: MyString
+  is_visible: false
+
+two:
+  msg_category_id: 1
+  message: MyString
+  is_visible: false

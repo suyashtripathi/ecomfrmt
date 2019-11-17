@@ -1,0 +1,31 @@
+<div data-hook="admin_message_repository_form_fields">
+  
+  
+
+<div class="row">
+  <div class="col-xs-12 col-md-8" data-hook="admin_message_repository_form_left">
+    <div data-hook="admin_message_repository_form_msg_category">
+      <%= f.field_container :msg_category, class: ['form-group'] do %>
+        <%= f.label :msg_category_id, Spree.t(:msg_category) %>
+        <%= f.collection_select(:msg_category_id, Spree::MessageCategory.all, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+        <%= f.error_message_on :msg_category %>
+      <% end %>
+    </div>
+
+    <div data-hook="admin_message_repository_form_is_visible">
+      <%= f.field_container :is_visible, class: ['form-group'] do %>
+        <%= f.label :is_visible, Spree.t(:is_visible) %>
+        <%= f.error_message_on :is_visible %>
+        <%= f.check_box :is_visible %>
+      <% end %>
+    </div>
+        
+    <div data-hook="admin_message_repository_form_front_message">
+      <%= f.field_container :message, class: ['form-group'] do %>
+        <%= f.label :message, Spree.t(:message) %>
+        <%= f.text_area :message, { rows: 4, class: 'form-control' } %>
+        <%= f.error_message_on :message %>
+      <% end %>
+    </div>
+  </div>
+</div>

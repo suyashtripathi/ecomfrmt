@@ -1,0 +1,32 @@
+<%= form_tag spree.cardinit_path(@product), :method => "get" do %>
+ 
+  <% if @product.variants_and_option_values(current_currency).any? %>
+    <div id="product-variants" class="col-md-6">
+      <h3 class="product-section-title"><%= Spree.t(:variants) %></h3>
+      <ul class="list-group">
+        <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+          <%= radio_button_tag "variant_id", variant.id, index == 0,
+              'data-price' => variant.price_in(current_currency).money,
+              'data-in-stock' => variant.can_supply?
+          %>
+          <%= label_tag "variant_id_#{ variant.id }" do %>
+            <span class="variant-description">
+              <%= variant_options variant %>
+            </span>
+            <% if variant_price variant %>
+              <span class="price diff"><%= variant_price variant %></span>
+            <% end %>
+            <% unless variant.can_supply? %>
+              <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+            <% end %>
+          <% end %>
+        <% end%>
+      </ul>
+    </div>
+  <% else %>
+    <%= hidden_field_tag "variant_id", @product.master.id %>
+  <% end %>
+  <%= hidden_field_tag "slug", @product.slug %>
+  
+  <%= submit_tag "Make My Card", class: "btn btn-info" %>
+<% end %>

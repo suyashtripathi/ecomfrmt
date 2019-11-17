@@ -1,0 +1,124 @@
+<%= order_form.fields_for :line_items, line_item do |item_form| %>
+  <% variant = line_item.variant %>
+  <!-- Product-->
+  <div class="line-item">
+    <div class="row d-flex align-items-center text-left text-md-center">
+      <div class="col-12 col-md-5"><a href="#" id="<%="delete_#{dom_id(line_item)}"%>" class="cart-remove close d-sm-none delete"><i class="fa fa-times"></i></a>
+      <%=# link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}"
+      %>
+        <div class="d-flex align-items-center">
+          <% if (!variant.product.product_category.nil? && variant.product.product_category.name == "Card")%>
+            <% ref_link = "#" %>
+            <% prvw_class = "open-preview" %>
+            <% img_width = variant.images[0].attachment.blob.metadata['width'].to_i %>
+            <% img_height = variant.images[0].attachment.blob.metadata['height'].to_i %>
+            <% if img_width <= img_height %>
+              <% card_class = "5x7" %>
+            <% else %>
+              <% card_class = "7x5" %>
+            <% end %>
+          <% else %>
+            <% ref_link = product_path(variant.product) %>
+            <% prvw_class = "" %>
+            <% card_class = "full" %>
+          <% end %>
+          <a href="<%=ref_link%>" class="<%=prvw_class%>">
+            <div class="item-img-container-<%=card_class%>">
+              <% if ((variant.images.length == 0) || (variant.product.product_category.nil?) || (!variant.product.product_category.nil? && variant.product.product_category.name != "Card")) %>
+                <%= small_image(variant.product, class: 'cart-item-img') %>
+              <% elsif (!line_item.card_preview.nil?) %>
+                <% front_img_path = Rails.application.routes.url_helpers.rails_representation_path(line_item.card_preview.generated_front.variant(resize: '690x490^'), only_path: true) %>
+                <% inside_img_path = Rails.application.routes.url_helpers.rails_representation_path(line_item.card_preview.generated_inside.variant(resize: '690x490^'), only_path: true) %>
+
+                <% if !variant.product.product_category.nil? && variant.product.product_category.name == "Card" && !line_item.card_preview.nil? && !line_item.card_preview.generated_front.nil? %>
+                  <%=# image_tag(main_app.url_for(line_item.card_preview.generated_front), class: 'cart-item-img')
+                  %>
+                  <%= image_tag(Rails.application.routes.url_helpers.rails_representation_path(line_item.card_preview.generated_front.variant(resize: '690x490^'), only_path: true), class: 'card-item-img-' + card_class, 'data-page-type': card_class, 'data-imgs': {'front': front_img_path, 'inside': inside_img_path}.to_json) %>
+                <% else %>
+                  <%= image_tag(main_app.url_for(variant.images.first.url(:small)), class: 'cart-item-img') %>
+                <% end %>
+              <% end %>
+            </div>
+          </a>
+          <div class="cart-title text-left">
+            <strong><%= line_item.name %></strong>
+            <br><span class="text-muted text-sm">Variant: <%= variant.options_text.gsub("card-edit-ctg: ", "") %></span><br><!--<span class="text-muted text-sm">Colour: Green</span>-->
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-7 mt-4 mt-md-0">
+        <div class="row align-items-center">
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-6 d-md-none text-muted">Price per item</div>
+              <div class="col-6 col-md-12 text-right text-md-center"><%= line_item.single_money.to_html %></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row align-items-center">
+              <div class="d-md-none col-7 col-sm-9 text-muted">Quantity</div>
+              <div class="col-5 col-sm-3 col-md-12">
+                <div class="d-flex align-items-center">
+                  <div class="btn btn-items btn-items-decrease">-</div>
+                  <!--<input type="text" value="1" class="form-control line_item_quantity text-center border-0 border-md input-items">-->
+                  <%= item_form.text_field :quantity, value: line_item.quantity, class: "form-control line_item_quantity text-center border-0 border-md input-items" %>
+                  <div class="btn btn-items btn-items-increase">+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-6 d-md-none text-muted">Total price </div>
+              <div class="col-6 col-md-12 text-right text-md-center"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
+            </div>
+          </div>
+          <div class="col-2 d-none d-md-block text-center"><a href="#" id="<%="delete_#{dom_id(line_item)}"%>" class="cart-remove close d-none d-sm-block delete"><i class="fa fa-times"></i></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<tr class="line-item">
+    <td class="cart-item-image" data-hook="cart_item_image">
+      <% if variant.images.length == 0 %>
+        <%=# link_to small_image(variant.product), variant.product
+        %>
+      <% else %>
+        <%=# link_to image_tag(main_app.url_for(variant.images.first.url(:small))), variant.product
+        %>
+      <% end %>
+    </td>
+    <td class="cart-item-description" data-hook="cart_item_description">
+      <h4><%=# link_to line_item.name, product_path(variant.product)
+      %></h4>
+      <%=# variant.options_text
+      %>
+      <% if line_item.insufficient_stock? %>
+        <span class="out-of-stock">
+          <%=# Spree.t(:out_of_stock)
+          %>&nbsp;&nbsp;<br />
+        </span>
+      <% end %>
+      <span class="line-item-description" data-hook="line_item_description">
+        <%=# line_item_description_text(line_item.description)
+        %>
+      </span>
+    </td>
+    <td class="lead text-primary cart-item-price" data-hook="cart_item_price">
+      <%=# line_item.single_money.to_html
+      %>
+    </td>
+    <td class="cart-item-quantity" data-hook="cart_item_quantity" valign="center">
+      <%=# item_form.number_field :quantity, min: 0, class: "form-control line_item_quantity", size: 5
+      %>
+    </td>
+    <td class="lead text-primary cart-item-total" data-hook="cart_item_total">
+      <%=# line_item.display_amount.to_html unless line_item.quantity.nil?
+      %>
+    </td>
+    <td class="cart-item-delete" data-hook="cart_item_delete">
+      <%=# link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}"
+      %>
+    </td>
+  </tr>-->
+<% end %>

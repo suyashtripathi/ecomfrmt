@@ -1,0 +1,43 @@
+<% if @uploaded_images.count > 0 %>
+  <% images_count = @uploaded_images.size %>
+  <% @uploaded_images.each_with_index do |upload, index| %>
+    <% if show_elems.include? 'last' %>
+      <% if index == images_count - 1 %>
+        <% display_class = 'showClass'%>
+      <% else %>
+        <% display_class = 'hideClass'%>
+      <% end %>
+    <% else %>
+      <% display_class = '' %>
+    <% end %>
+    
+    <% minDispWidth = 490 %>
+    <% minDispHeight = 490 %>
+    <% upload_variant = upload.variant(resize: "#{minDispWidth}x#{minDispHeight}^") %>
+    <div class="col-3 p-0 text-center" data-img="<%=upload.id%>">
+      <figure class="figure">
+        <%= image_tag main_app.url_for(upload_variant), :data => { :img => upload.id.to_s, :width => upload.metadata['width'], :height => upload.metadata['height']}, class:  'uploaded-images ' + img_class + ' ' + display_class, style: 'z-index: ' + index.to_s %>
+        <figcaption><i class="fa fa-circle dot"></i></figcaption>
+        <figcaption class="figure-caption text-center">
+          <% if img_class.include? 'thumbnail'%>
+            <%= link_to '<svg class="svg-icon mini-service-icon"><use xlink:href="#trash-can-2"></use></svg>'.html_safe, spree.delete_upload_attachment_path(id: upload.id),
+                    method: :delete,
+                    remote: true ,
+                    data: { confirm: 'Image will be deleted. Confirm to proceed.', img: upload.id.to_s } %>
+          <% end %>
+        </figcaption>
+      </figure>
+      <%=# image_tag main_app.url_for(upload_variant), :data => { :img => upload.id.to_s, :width => upload.metadata['width'], :height => upload.metadata['height']}, class:  'uploaded-images mb-2 ' + img_class + ' ' + display_class, style: 'z-index: ' + index.to_s
+      %><br>
+      <%# if img_class.include? 'thumbnail'
+      %>
+        <%=# link_to '<svg class="svg-icon mini-service-icon"><use xlink:href="#trash-can-2"></use></svg>'.html_safe, spree.delete_upload_attachment_path(id: upload.id),
+                # method: :delete,
+                # remote: true ,
+                # data: { confirm: 'Image will be deleted. Confirm to proceed.', img: upload.id.to_s }
+                %>
+      <%# end
+      %>
+    </div>
+  <% end %>
+<% end %>

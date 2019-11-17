@@ -1,0 +1,35 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user } %>
+<!-- Hero Section-->
+<section class="hero">
+  <div class="container">
+    <!-- Hero Content-->
+    <div class="hero-content pb-5 text-center">
+      <h1 class="hero-heading text-capitalize thin-weight">Forgot Password?</h1>
+      <!--<div class="row">
+        <div class="col-xl-8 offset-xl-2"><p class="lead text-muted"><%= Spree.t(:instructions_to_reset_password) %></p></div>
+      </div>-->
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xl-9">
+        <div class="block mb-5">
+          <div class="block-header"><strong class="text-uppercase">Enter your Email address</strong></div>
+          <div class="block-body">
+            <%= form_for Spree::User.new, :as => :spree_user, :url => spree.reset_password_path do |f| %>
+              <div class="form-group">
+                <%= f.label :email, Spree.t(:email) %>
+                <%= f.email_field :email, :class => "form-control", required: true %>
+              </div>
+              <div>
+                <%= f.submit Spree.t(:reset_password), :class => 'btn btn-theme mt-5' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

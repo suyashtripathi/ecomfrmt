@@ -1,0 +1,28 @@
+<% max_level = Spree::Config[:max_level_in_taxons_menu] || 1 %>
+<!--<nav id="taxonomies" class="sidebar-item" data-hook>
+  <% @taxonomies.each do |taxonomy| %>
+    <% cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+      <% if taxonomy.root.children.any? %>
+        <h4 class='taxonomy-root'><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></h4>
+        <%= taxons_tree(taxonomy.root, @taxon, max_level) %>
+      <% end %>
+    <% end %>
+  <% end %>
+</nav>-->
+
+<div class="sidebar col-xl-3 col-lg-4 order-lg-1">
+  <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#categoriesMenu" aria-expanded="false" aria-controls="categoriesMenu" class="d-lg-none block-toggler">Product Categories</a>
+    <div id="categoriesMenu" class="expand-lg collapse">
+      <% @taxonomies.each do |taxonomy| %>
+        <% cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+          <% if taxonomy.root.children.any? %>
+            <!--<h4 class='taxonomy-root hero-heading'><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></h4>-->
+            <div class="nav nav-pills flex-column mt-4 mt-lg-0"> <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span><strong><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></strong></span><span class="sidebar-badge"> <%=taxonomy.root.children.count%></span></a>
+            <%= taxons_tree(taxonomy.root, @taxon, max_level) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- /Sidebar end-->

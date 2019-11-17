@@ -1,0 +1,15 @@
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @inside_tpl_cfg } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:inside_tpl_cfgs), admin_inside_tpl_cfgs_url %> /
+  <%= Spree.t(:new_inside_tpl_cfg) %>
+<% end %>
+
+<%= form_for [:admin, @inside_tpl_cfg] do |f| %>
+  <fieldset data-hook="new_inside_tpl_cfg">
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="form-actions">
+      <%= render partial: 'spree/admin/shared/new_resource_links' %>
+    </div>
+  </fieldset>
+<% end %>

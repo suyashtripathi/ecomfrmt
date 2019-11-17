@@ -1,0 +1,61 @@
+<% @body_id = 'login' %>
+<!--<div class="col-md-6 <%= request.path == spree.login_path ? "col-md-offset-3" : "" %>">
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= Spree.t(:login_as_existing) %></h3>
+    </div>
+      <div id="existing-customer" class="panel-body" data-hook="login">
+          <%=# render :partial => 'spree/shared/login'
+          %>
+          <div class="text-center">
+            <%=# Spree.t(:or)
+            %>
+                <%=# link_to Spree.t(:create_a_new_account), spree.signup_path
+                %> |
+                <%=# link_to Spree.t(:forgot_password), spree.recover_password_path
+                %>
+          </div>
+          <div data-hook="login_extras"></div>
+      </div>
+  </div>
+</div>-->
+<!-- Hero Section-->
+<section class="hero">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <!--<ol class="breadcrumb justify-content-center">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Login</li>
+    </ol>-->
+    <!-- Hero Content-->
+    <div class="hero-content pb-5 text-center">
+      <h1 class="hero-heading mb-0">Login</h1>
+    </div>
+  </div>
+</section>
+<!-- customer login-->
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="block">
+          <div class="block-header">
+            <h6 class="text-uppercase mb-0">Login</h6>
+          </div>
+          <div class="block-body">
+            <p class="lead">Already our customer?</p>
+            <!--<p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>-->
+            <hr>
+            <%= render :partial => 'spree/shared/login' %>
+            <div class="text-center mt-5 lead">
+              <%= Spree.t(:new_to_mangotwins) %>?&nbsp;<%= link_to Spree.t(:create_a_new_account), spree.signup_path %> <!--|
+                <%=# link_to Spree.t(:forgot_password), spree.recover_password_path
+                %>-->
+            </div>
+            <div data-hook="login_extras"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

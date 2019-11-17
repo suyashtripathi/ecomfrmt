@@ -1,0 +1,104 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+<!--<h1><%= Spree.t(:registration) %></h1>-->
+<!--<div id="registration" class="row" data-hook>
+  <div id="account">
+    <%=# render :partial => 'new_user'
+    %>
+  </div>
+  <% if Spree::Config[:allow_guest_checkout] %>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%=# Spree.t(:guest_user_account)
+          %></h3>
+        </div>
+        <div id="guest_checkout" class="panel-body" data-hook>
+          <%=# form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f|
+          %>
+            <div class="form-group">
+              <%=# f.label :email, Spree.t(:email), class: 'required', title: 'required'
+              %>
+              <%=# f.email_field :email, :class => 'form-control title', :placeholder => Spree.t(:email)
+              %>
+            </div>
+            <div><%=# f.submit Spree.t(:continue), :class => 'btn btn-lg btn-success btn-block'
+            %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <%# end
+  %>
+</div>-->
+<!-- Hero Section-->
+<section class="hero">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <!--<ol class="breadcrumb justify-content-center">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Registration</li>
+    </ol>-->
+    <!-- Hero Content-->
+    <div class="hero-content pb-5 text-center">
+      <h1 class="hero-heading mb-0">Registration</h1>
+    </div>
+  </div>
+</section>
+<!-- customer login-->
+<section>
+  <div class="container" id="registration">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="block">
+          <div class="block-header">
+            <h6 class="text-uppercase mb-0">New account</h6>
+          </div>
+          <div class="block-body" id="account">
+            <p class="lead">Not our registered customer yet?</p>
+            <!--<p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>-->
+            <hr>
+            <%= render :partial => 'new_user' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="block">
+          <div class="block-header">
+            <h6 class="text-uppercase mb-0">Login</h6>
+          </div>
+          <div class="block-body" id="account">
+            <p class="lead">For Existing Customers</p>
+            <!--<p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>-->
+            <hr>
+            <%= render :partial => 'spree/shared/login' %>
+            <div data-hook="login_extras"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 mt-5" id="guest_checkout">
+        <div class="block">
+          <div class="block-header">
+            <h6 class="text-uppercase mb-0">Guest Checkout</h6>
+          </div>
+          <div class="block-body" id="account">
+            <p class="lead">Checkout as Guest</p>
+            <!--<p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>-->
+            <hr>
+            <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f|%>
+              <div class="form-group">
+                <%=# f.label :email, Spree.t(:email), class: 'required', title: 'required'
+                %>
+                <%= f.email_field :email, :class => 'form-control title', :placeholder => Spree.t(:email) %>
+              </div>
+              <div><%= f.submit Spree.t(:continue), :class => 'btn btn-theme' %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+    </div>
+  </div>
+</section>
