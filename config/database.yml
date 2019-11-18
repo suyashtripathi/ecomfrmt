@@ -48,4 +48,5 @@ production:
   database: mangotwins20
   pool: 5
   timeout: 5000
-  
+  username: deploy
+  password: deploy@801
