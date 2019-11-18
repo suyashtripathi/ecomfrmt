@@ -16,8 +16,9 @@ Spree.config do |config|
     config.products_per_page = 20
     config.currency = 'INR'
     config.max_level_in_taxons_menu = 3
-    country = Spree::Country.find_by_name('India')
-    config.default_country_id = country.id if country.present?
+    # country = Spree::Country.find_by_name('India')
+    # config.default_country_id = country.id if country.present?
+    config.default_country_id = 105
 
 end
 
