@@ -4,6 +4,14 @@ lock "~> 3.11.2"
 set :application, "mangotwins20"
 set :repo_url, "git@gitlab.com:suyashtripathi/mangotwins20.git"
 
+# Fixing Starts - Capistrano deploy PG::ConnectionBad: FATAL: password authentication failed
+set :pg_without_sudo, false
+set :pg_host, 'localhost'
+set :pg_database, 'appname_production'
+set :pg_username, 'username'
+set :pg_ask_for_password, true
+# Fixing Ends
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
